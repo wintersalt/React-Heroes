@@ -18,6 +18,7 @@ main {
   width: 100%;
   height: 60px;
   margin: 2rem 0;
+  border-radius: 5px;
 }
 
 .main__content__banner__muted {
@@ -28,8 +29,9 @@ main {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
-  color: #fff;
+  color: var(--main-font-color);
   text-transform: capitalize;
+  border-radius: 5px;
 }
 
 .main__content__list {

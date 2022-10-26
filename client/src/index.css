@@ -1,5 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;700;800&display=swap');
 
+:root {
+  --main-font-color: #eee;
+  --accent-font-color: #f47521;
+  --additional-font-color: rgb(20, 20, 20);
+
+  --header-background-color: #23252b;
+  --body-background-color: #000;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -8,9 +17,10 @@
 
 body {
   font-family: 'Open Sans', sans-serif;
+  background: var(--body-background-color);
 }
 
-.content-width { 
+.content-width {
   max-width: 1240px;
   padding: 0 1rem;
 }
