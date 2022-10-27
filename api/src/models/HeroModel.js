@@ -6,6 +6,7 @@ const HeroSchema = new mongoose.Schema({
   origin_description: { type: String, required: true },
   superpowers: { type: String, required: true },
   catch_phrase: { type: String, required: true },
+  images: [{ name: { type: String, required: false } }],
 })
 
 const HeroModel = mongoose.model('HeroModel', HeroSchema)

@@ -32,6 +32,7 @@ main {
   color: var(--main-font-color);
   text-transform: capitalize;
   border-radius: 5px;
+  z-index: 1;
 }
 
 .main__content__list {

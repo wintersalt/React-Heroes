@@ -1,11 +1,14 @@
 const heroesRouter = require('express').Router()
+const imageUpload = require('../middleware/uploadFile')
 const {
   addNewHeroController,
   removeHeroController,
-  patchHeroController
+  getHeroByIdController,
+  patchHeroController,
 } = require('../controllers/HeroControllers')
 
-heroesRouter.post('/', addNewHeroController)
+heroesRouter.post('/', imageUpload.array('images', 5), addNewHeroController)
+heroesRouter.get('/:id', getHeroByIdController)
 heroesRouter.delete('/', removeHeroController)
 heroesRouter.patch('/:id', patchHeroController)
 

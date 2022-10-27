@@ -18,15 +18,17 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
+  color: var(--accent-font-color);
+  transition: 0.2s ease-in-out;
+}
+
+.header__content__logo:hover {
+  color: var(--main-font-color);
 }
 
 .header__content__logo img {
   width: 60px;
   margin-right: 0.5rem;
-}
-
-.header__content__logo h1 {
-  color: var(--accent-font-color);
 }
 
 .header__content__actions {
