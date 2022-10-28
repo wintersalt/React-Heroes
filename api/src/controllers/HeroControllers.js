@@ -1,13 +1,42 @@
+const uploadImage = require('../utils/cloudinary')
 const HeroModel = require('../models/HeroModel')
+const dotenv = require('dotenv')
+const axios = require('axios')
 const fs = require('fs')
+
+const { parsed: config } = dotenv.config()
+
+const BASE_URL = `https://api.cloudinary.com/v1_1/${config.CLOUD_NAME}/resources/image`
+const auth = {
+  username: config.API_KEY,
+  password: config.API_SECRET,
+}
+
+const getPhotosController = async (req, res) => {
+  const response = await axios.get(BASE_URL, { auth })
+
+  return res.send(response.data)
+}
+
+const uploadImageController = async (req, res) => {
+  const { image } = req.body
+
+  console.log(image)
+
+  try {
+    await uploadImage(image)
+    res.status(200)
+  } catch (error) {
+    res.status(400)
+    console.error(error)
+  }
+}
 
 const addNewHeroController = async (req, res) => {
   const { nickname, real_name, origin_description, superpowers, catch_phrase } =
     req.body
 
   const images = req.files
-
-  console.log('Images: ', images)
 
   const newHero = new HeroModel({
     nickname,
@@ -59,11 +88,9 @@ const removeHeroController = async (req, res) => {
   try {
     const { images } = await HeroModel.findById(id_remove)
 
-    console.log(images)
-
     images.forEach((image) => {
       fs.unlink(`./src/images/${image.name}`, (err) => {
-        if (err) res.status(400).json({ message: 'Images not found...' })
+        if (err) console.log('Image not found: ' + image.name)
       })
     })
 
@@ -76,8 +103,10 @@ const removeHeroController = async (req, res) => {
 }
 
 module.exports = {
+  getPhotosController,
   addNewHeroController,
-  removeHeroController,
   getHeroByIdController,
   patchHeroController,
+  removeHeroController,
+  uploadImageController,
 }
